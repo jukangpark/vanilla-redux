@@ -1,10 +1,22 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import { createStore } from "redux";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const countModifier = (count = 0, action) => {
+  console.log(count, action);
+  if (action.type === "ADD") {
+    return count + 1;
+  } else if (action.type === "MINUS") {
+    return count - 1;
+  } else {
+    return count;
+  }
+};
+
+const countStore = createStore(countModifier);
+
+countStore.dispatch({ type: "ADD" });
+countStore.dispatch({ type: "ADD" });
+countStore.dispatch({ type: "ADD" });
+countStore.dispatch({ type: "ADD" });
+countStore.dispatch({ type: "ADD" });
+countStore.dispatch({ type: "MINUS" });
+console.log(countStore.getState());
